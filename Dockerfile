@@ -15,7 +15,6 @@ RUN pip install --no-cache-dir pyrogram==2.0.106 tgcrypto
 COPY . /app
 
 # Expose port (if necessary for external access)
-# EXPOSE 8080
 
 # Define the command to run the bot
 CMD ["python", "bot.py"]
