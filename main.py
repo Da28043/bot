@@ -21,7 +21,7 @@ async def info(client, message):
 
 @bot.on_message(filters.command('start'))
 async def start(client, message):
-    await message.reply('Добро пожаловать')
+    await message.reply('Добро пожаловать, меня зовут помошник')
 
 
 @bot.on_message(filters.text)
