@@ -32,6 +32,7 @@ async def start(client, message):
 
 @bot.on_message(filters.text)
 async def echo(client, message):
+    print(message)
     if message.text.lower() == 'привет':
         await message.reply('Привет')
     elif message.text.lower() == 'пока':
