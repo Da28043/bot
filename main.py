@@ -3,7 +3,7 @@ import datetime
 
 date_time = datetime.datetime.now()
 current_time = date_time.time()
-print(current_time)
+
 
 bot = Client(
     api_id=17254355,
@@ -17,7 +17,13 @@ bot = Client(
 async def info(client, message):
     await message.reply('Все команды:')
     await message.reply('/start')
+    await message.reply('/time')
 
+@bot.on_message(filters.command('time'))
+async def time(client, message):
+    date_time = datetime.datetime.now()
+    current_time = date_time.time()
+    await message.reply(f'Текущее время -{current_time}')
 
 @bot.on_message(filters.command('start'))
 async def start(client, message):
