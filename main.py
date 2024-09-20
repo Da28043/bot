@@ -1,5 +1,6 @@
 from pyrogram import Client, filters
 import datetime
+import keyboards
 
 date_time = datetime.datetime.now()
 current_time = date_time.time()
@@ -27,7 +28,11 @@ async def time(client, message):
 
 @bot.on_message(filters.command('start'))
 async def start(client, message):
-    await message.reply('Добро пожаловать, меня зовут помошник')
+    # await message.reply('Добро пожаловать, меня зовут помошник')
+    await message.reply("Добро пожаловать!",
+                        reply_markup=keyboards.kb_main
+                        )
+
 
 
 @bot.on_message(filters.text)
