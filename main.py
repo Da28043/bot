@@ -37,6 +37,8 @@ async def echo(client, message):
         await message.reply('Привет')
     elif message.text.lower() == 'пока':
         await message.reply('Пока')
+    elif message.text.lower() == 'как дела?':
+        await message.reply('Нормально')
     else:
         await message.reply(f'Ты написал: {message.text}')
 
