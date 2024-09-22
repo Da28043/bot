@@ -13,6 +13,10 @@ bot = Client(
     name='Помощник'
 )
 
+def button_filter(button):
+   async def func(_, __, msg):
+       return msg.text == button.text
+   return filters.create(func, "ButtonFilter", button=button)
 
 @bot.on_message(filters.command('info'))
 async def info(client, message):
