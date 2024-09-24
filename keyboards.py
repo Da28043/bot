@@ -4,7 +4,7 @@ from pyrogram import emoji
 btn_info = KeyboardButton(f'{emoji.INFORMATION} Инфо')
 btn_games = KeyboardButton(f'{emoji.VIDEO_GAME} Игры')
 btn_profile = KeyboardButton(f'{emoji.PERSON} Профиль')
-btn_time = KeyboardButton(f'{emoji.TIMER_CLOCK} Время')
+btn_time = KeyboardButton(f'{emoji.ALARM_CLOCK} Время')
 
 kb_main = ReplyKeyboardMarkup(
     keyboard=[
