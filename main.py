@@ -37,7 +37,7 @@ async def game(client, messege):
                         reply_markup=keyboards.kb_games
                         )
 
-@bot.on_message(filters.command('start'))
+@bot.on_message(filters.command('start') | button_filter(keyboards.btn_menu))
 async def start(client, message):
     # await message.reply('Добро пожаловать, меня зовут помошник')
     await message.reply("Добро пожаловать!",
