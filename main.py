@@ -33,7 +33,9 @@ async def time(client, message):
 
 @bot.on_message(filters.command('game') | button_filter(keyboards.btn_games))
 async def game(client, messege):
-    await messege.reply("Выберите игру")
+    await messege.reply("Выберите игру",
+                        reply_markup=keyboards.kb_games
+                        )
 
 @bot.on_message(filters.command('start'))
 async def start(client, message):

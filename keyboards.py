@@ -5,10 +5,16 @@ btn_info = KeyboardButton(f'{emoji.INFORMATION} Инфо')
 btn_games = KeyboardButton(f'{emoji.VIDEO_GAME} Игры')
 btn_profile = KeyboardButton(f'{emoji.PERSON} Профиль')
 btn_time = KeyboardButton(f'{emoji.ALARM_CLOCK} Время')
-
+btn_casino = KeyboardButton(f'{emoji.ROLLED_UP_NEWSPAPER} Камень ножницы бумага')
 kb_main = ReplyKeyboardMarkup(
     keyboard=[
                 [btn_info, btn_games, btn_profile, btn_time]
+    ],
+    resize_keyboard=True
+)
+kb_games = ReplyKeyboardMarkup(
+    keyboard=[
+                [btn_casino]
     ],
     resize_keyboard=True
 )
