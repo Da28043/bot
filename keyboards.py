@@ -8,7 +8,7 @@ btn_time = KeyboardButton(f'{emoji.TIMER_CLOCK} Время')
 
 kb_main = ReplyKeyboardMarkup(
     keyboard=[
-                [btn_info, btn_games, btn_profile]
+                [btn_info, btn_games, btn_profile, btn_time]
     ],
     resize_keyboard=True
 )
