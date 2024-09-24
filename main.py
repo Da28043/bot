@@ -14,11 +14,11 @@ bot = Client(
 )
 
 def button_filter(button):
-   async def func(_, __, msg):
+   async def func(_, __, msg,):
        return msg.text == button.text
    return filters.create(func, "ButtonFilter", button=button)
 
-@bot.on_message(filters.command('info'))
+@bot.on_message(filters.command('info') | button_filter(keyboards.btn_info))
 async def info(client, message):
     await message.reply('Все команды:')
     await message.reply('/start')
