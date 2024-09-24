@@ -23,12 +23,17 @@ async def info(client, message):
     await message.reply('Все команды:')
     await message.reply('/start')
     await message.reply('/time')
+    await message.reply('/game')
 
 @bot.on_message(filters.command('time'))
 async def time(client, message):
     date_time = datetime.datetime.now()
     current_time = date_time.time()
     await message.reply(f'Текущее время -{current_time}')
+
+@bot.on_message(filters.command('game') | button_filter(keyboards.btn_games))
+async def game(client, messege):
+    await messege.reply("Выберите игру")
 
 @bot.on_message(filters.command('start'))
 async def start(client, message):
