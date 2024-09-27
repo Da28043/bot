@@ -1,4 +1,7 @@
+import random
+
 from pyrogram import Client, filters
+from random import randint
 import datetime
 import keyboards
 
@@ -40,6 +43,17 @@ async def game(client, messege):
 async def rps(bot, messege):
     await messege.reply("Твой ход", reply_markup=keyboards.kb_rps
                         )
+@bot.on_message(button_filter(keyboards.btn_rock) |
+                (button_filter(keyboards.btn_scissors) |
+                (button_filter(keyboards.btn_paper) )
+async def choice_rps(bot, message):
+    rock = keyboards.btn_rock.text
+    scissors = keyboards.btn_scissors.text
+    paper = keyboards.btn_paper.text
+    user = message.text
+    pc = random.choice([rock, scissors, paper])
+    print(user, pc)
+
 
 
 @bot.on_message(filters.command('start') | button_filter(keyboards.btn_menu))
