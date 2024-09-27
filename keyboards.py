@@ -19,7 +19,7 @@ kb_main = ReplyKeyboardMarkup(
 )
 kb_games = ReplyKeyboardMarkup(
     keyboard=[
-                [btn_casino, btn_menu, btn_quest]
+                [btn_rps, btn_menu, btn_quest]
     ],
     resize_keyboard=True
 )

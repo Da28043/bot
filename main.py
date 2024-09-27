@@ -38,7 +38,8 @@ async def game(client, messege):
                         )
 @bot.on_message(filters.command('rps') | button_filter(keyboards.btn_rps))
 async def rps(bot, messege):
-    await messege.reply("Твой ход", reply_markup=keyboards.kb_rps)
+    await messege.reply("Твой ход", reply_markup=keyboards.kb_rps
+                        )
 
 
 @bot.on_message(filters.command('start') | button_filter(keyboards.btn_menu))
