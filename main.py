@@ -44,8 +44,8 @@ async def rps(bot, messege):
     await messege.reply("Твой ход", reply_markup=keyboards.kb_rps
                         )
 @bot.on_message(button_filter(keyboards.btn_rock) |
-                (button_filter(keyboards.btn_scissors) |
-                (button_filter(keyboards.btn_paper) )
+                button_filter(keyboards.btn_scissors |
+                button_filter(keyboards.btn_paper) )
 async def choice_rps(bot, message):
     rock = keyboards.btn_rock.text
     scissors = keyboards.btn_scissors.text
