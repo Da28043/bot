@@ -10,7 +10,7 @@ btn_menu = KeyboardButton(f'{emoji.BACK_ARROW} Назад')
 btn_quest = KeyboardButton(f'{emoji.RED_QUESTION_MARK} Квест')
 btn_rock = KeyboardButton(f'{emoji.ROCK} Камени')
 btn_scissors = KeyboardButton(f'{emoji.SCISSORS} Ножницы')
-btn_paper = KeyboardButton(f'{emoji.NOTEBOOK} Камень')
+btn_paper = KeyboardButton(f'{emoji.ROLL_OF_PAPER} Бумага')
 kb_main = ReplyKeyboardMarkup(
     keyboard=[
                 [btn_info, btn_games, btn_profile, btn_time]

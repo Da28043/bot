@@ -43,9 +43,11 @@ async def game(client, messege):
 async def rps(bot, messege):
     await messege.reply("Твой ход", reply_markup=keyboards.kb_rps
                         )
-@bot.on_message(button_filter(keyboards.btn_rock) |
-                button_filter(keyboards.btn_scissors |
-                button_filter(keyboards.btn_paper) )
+# @bot.on_message(button_filter(keyboards.btn_rock), (keyboards.btn_scissors), (keyboards.btn_scissors)) |
+#                 # button_filter(keyboards.btn_scissors |
+#                 # button_filter(keyboards.btn_paper) )
+@bot.on_message(button_filter(keyboards.btn_rock)| button_filter(keyboards.btn_paper)| button_filter(keyboards.btn_scissors))
+
 async def choice_rps(bot, message):
     rock = keyboards.btn_rock.text
     scissors = keyboards.btn_scissors.text
@@ -53,7 +55,10 @@ async def choice_rps(bot, message):
     user = message.text
     pc = random.choice([rock, scissors, paper])
     print(user, pc)
-
+    if user == pc:
+        await message.reply('Ничья')
+    elif user == rock and pc == scissors:
+        await message.reply(f'Ты выйграл. Бот выбрал {pc}')
 
 
 @bot.on_message(filters.command('start') | button_filter(keyboards.btn_menu))
