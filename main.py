@@ -1,3 +1,4 @@
+import json
 import random
 
 from pyrogram import Client, filters
@@ -36,9 +37,15 @@ async def time(client, message):
 
 @bot.on_message(filters.command('game') | button_filter(keyboards.btn_games))
 async def game(client, messege):
+    with open("users.json", "r") as file:
+        users = json.load(file)
+    # if users[str(messege.from_user.id)] >= 5:
     await messege.reply("Выберите игру",
-                        reply_markup=keyboards.kb_games
-                        )
+                            reply_markup=keyboards.kb_games
+                            )
+    # else:
+    #     await messege.reply(f"Не хватает средств. На твоём счету{users[str(messege.from_user.id)]} Минимальная сумма для игры - 5")
+
 @bot.on_message(filters.command('rps') | button_filter(keyboards.btn_rps))
 async def rps(bot, messege):
     await messege.reply("Твой ход", reply_markup=keyboards.kb_rps
@@ -57,8 +64,14 @@ async def choice_rps(bot, message):
     print(user, pc)
     if user == pc:
         await message.reply('Ничья')
-    elif user == rock and pc == scissors:
-        await message.reply(f'Ты выйграл. Бот выбрал {pc}')
+    elif (user == rock and pc in [scissors, paper]) or (user == scissors and pc == paper) or (
+            user == paper and pc == rock):
+        await message.reply(f'Ты выйграл. Бот выбрал {pc}',
+                            reply_markup=keyboards.kb_games)
+    else:
+        await message.reply(f"Ты проиграл. Бот выбрал {pc}",
+                            reply_markup = keyboards.kb_games)
+
 
 
 @bot.on_message(filters.command('start') | button_filter(keyboards.btn_menu))
@@ -67,7 +80,12 @@ async def start(client, message):
     await message.reply("Добро пожаловать!",
                         reply_markup=keyboards.kb_main
                         )
-
+    with open("users.json","r") as file:
+        users = json.load(file)
+    if str(message.from_user.id) not in users.keys():
+        users[message.from_user.id] = 100
+        with open("users.json","w") as file:
+            json.dump(users, file)
 
 
 @bot.on_message(filters.text)
@@ -81,5 +99,8 @@ async def echo(client, message):
         await message.reply('Нормально')
     else:
         await message.reply(f'Ты написал: {message.text}')
+
+
+
 
 bot.run()
