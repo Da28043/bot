@@ -64,7 +64,7 @@ async def choice_rps(bot, message):
     print(user, pc)
     if user == pc:
         await message.reply('Ничья')
-    elif (user == rock and pc in [scissors, paper]) or (user == scissors and pc == paper) or (
+    elif (user == rock and pc == scissors) or (user == scissors and pc == paper) or (
             user == paper and pc == rock):
         await message.reply(f'Ты выйграл. Бот выбрал {pc}',
                             reply_markup=keyboards.kb_games)
