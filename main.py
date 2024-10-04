@@ -39,12 +39,12 @@ async def time(client, message):
 async def game(client, messege):
     with open("users.json", "r") as file:
         users = json.load(file)
-    # if users[str(messege.from_user.id)] >= 5:
-    await messege.reply("Выберите игру",
+    if users[str(messege.from_user.id)] >= 5:
+        await messege.reply("Выберите игру",
                             reply_markup=keyboards.kb_games
                             )
-    # else:
-    #     await messege.reply(f"Не хватает средств. На твоём счету{users[str(messege.from_user.id)]} Минимальная сумма для игры - 5")
+    else:
+        await messege.reply(f"Не хватает средств. На твоём счету{users[str(messege.from_user.id)]} Минимальная сумма для игры - 5")
 
 @bot.on_message(filters.command('rps') | button_filter(keyboards.btn_rps))
 async def rps(bot, messege):
@@ -56,6 +56,8 @@ async def rps(bot, messege):
 @bot.on_message(button_filter(keyboards.btn_rock)| button_filter(keyboards.btn_paper)| button_filter(keyboards.btn_scissors))
 
 async def choice_rps(bot, message):
+    with open("users.json", "r") as file:
+        users = json.load(file)
     rock = keyboards.btn_rock.text
     scissors = keyboards.btn_scissors.text
     paper = keyboards.btn_paper.text
@@ -68,9 +70,13 @@ async def choice_rps(bot, message):
             user == paper and pc == rock):
         await message.reply(f'Ты выйграл. Бот выбрал {pc}',
                             reply_markup=keyboards.kb_games)
+        user[str(message.from_user.id)] += 10
     else:
         await message.reply(f"Ты проиграл. Бот выбрал {pc}",
                             reply_markup = keyboards.kb_games)
+        user[str(message.from_user.id)] -= 10
+    with open ("users.json", 'w') as file:
+        json.dump(users, file)
 
 
 
