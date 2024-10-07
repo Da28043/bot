@@ -1,5 +1,25 @@
-from pyrogram.types import KeyboardButton, ReplyKeyboardMarkup
+from pyrogram.types import KeyboardButton, ReplyKeyboardMarkup, InlineKeyboardButton, InlineKeyboardMarkup
 from pyrogram import emoji
+
+inline_kb_start_quest = InlineKeyboardMarkup([
+        [InlineKeyboardButton('Пройти квест',
+                            callback_date='start_quest')]
+    ])
+inline_kb_choice_door = InlineKeyboardMarkup([
+          [InlineKeyboardButton('левая дверь', callback_data='left_door')],
+          [InlineKeyboardButton('правая дверь', callback_data='right_door')]
+])
+
+inline_kb_left_door = InlineKeyboardMarkup([
+            [InlineKeyboardButton('Сражение с драконом', callback_data='dragon')],
+            [InlineKeyboardButton('Попытатся убежать', callback_data='run')]
+])
+inline_kb_right_door = InlineKeyboardMarkup([
+    [InlineKeyboardButton('Золотая корона', callback_data='gold_crow')],
+    [InlineKeyboardButton("Серебреный кинжал", callback_data="silver_dagger")],
+    [InlineKeyboardButton('Старая книга', callback_data='old_book')]
+])
+
 
 btn_info = KeyboardButton(f'{emoji.INFORMATION} Инфо')
 btn_games = KeyboardButton(f'{emoji.VIDEO_GAME} Игры')
