@@ -29,6 +29,7 @@ async def info(client, message):
     await message.reply('/time')
     await message.reply('/game')
     await message.reply('/profile')
+    await message.reply('/quest')
 @bot.on_message(filters.command('time'))
 async def time(client, message):
     date_time = datetime.datetime.now()
@@ -60,7 +61,6 @@ async def rps(bot, messege):
 #                 # button_filter(keyboards.btn_scissors |
 #                 # button_filter(keyboards.btn_paper) )
 @bot.on_message(button_filter(keyboards.btn_rock)| button_filter(keyboards.btn_paper)| button_filter(keyboards.btn_scissors))
-
 async def choice_rps(bot, message):
     with open("users.json", "r") as file:
         users = json.load(file)
@@ -100,17 +100,17 @@ async def start(client, message):
             json.dump(users, file)
 
 
-@bot.on_message(filters.text)
-async def echo(client, message):
-    print(message)
-    if message.text.lower() == 'привет':
-        await message.reply('Привет')
-    elif message.text.lower() == 'пока':
-        await message.reply('Пока')
-    elif message.text.lower() == 'как дела?' or message.text.lower() == 'как дела':
-        await message.reply('Нормально')
-    else:
-        await message.reply(f'Ты написал: {message.text}')
+# @bot.on_message(filters.text)
+# async def echo(client, message):
+#     print(message)
+#     if message.text.lower() == 'привет':
+#         await message.reply('Привет')
+#     elif message.text.lower() == 'пока':
+#         await message.reply('Пока')
+#     elif message.text.lower() == 'как дела?' or message.text.lower() == 'как дела':
+#         await message.reply('Нормально')
+#     # else:
+#     #     await message.reply(f'Ты написал: {message.text}')
 
 
 #Кнопка для квеста
@@ -129,19 +129,19 @@ async def handle_query(bot, query):
         await query.message.reply_text('Ты стоишь перед двумя дверьми какую из них выберишь?',
                                        reply_markup=keyboards.inline_kb_choice_door)
     elif query.data == 'left_door':
-        await query.message.reply_text('Ты входишь в комнату и видишь злого дракона! У тебя есть два варианта действий',
+        await query.message.reply_text('Ты входишь в комнату и видишь злого дракона! У тебя есть два варианта действия',
                                        reply_markup=keyboards.inline_kb_left_door)
-    elif query.data == 'rigt_door':
-        await query.message.reply_text('ТЫ входишь в комнату, наполненую сокровищами! Тебе нужно выбрать только одно сокровище',
+    elif query.data == 'right_door':
+        await query.message.reply_text('Ты входишь в комнату, наполненую сокровищами! Тебе нужно выбрать только одно сокровище',
                                        reply_markup=keyboards.inline_kb_right_door)
     elif query.data == 'dragon':
-        await bot.answer_callback_query(query.id, text='Ты сражаешься с дракономб но он оказывается слишком сильным. Ты погибаешь',
+        await bot.answer_callback_query(query.id, text='Ты сражаешься с драконом но он оказывается слишком сильным. Ты погибаешь',
                                         show_alert=True)
     elif query.data == 'run':
         await bot.answer_callback_query(query.id, text='Ты пытаешься убежать, но дракон догоняет тебя и съедает',
                                         show_alert=True)
     elif query.data =='gold_crown':
-        await bot.answer_callback_query(query.id, text='Ты берёшь золотую корону и выходишь из комноты. Пздравляю! Ты вйграл игру',
+        await bot.answer_callback_query(query.id, text='Ты берёшь золотую корону и выходишь из комнаты. Поздравляю! Ты выиграл игру.',
                                         show_alert=True)
     elif query.data == 'silver_dagger':
         await bot.answer_callback_query(query.id, text='Ты берешь серебренный кинжал и выходишь из комнаты. К сожалению, клинок ничего не стоит',

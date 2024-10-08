@@ -3,7 +3,7 @@ from pyrogram import emoji
 
 inline_kb_start_quest = InlineKeyboardMarkup([
         [InlineKeyboardButton('Пройти квест',
-                            callback_date='start_quest')]
+                            callback_data='start_quest')]
     ])
 inline_kb_choice_door = InlineKeyboardMarkup([
           [InlineKeyboardButton('левая дверь', callback_data='left_door')],
@@ -15,7 +15,7 @@ inline_kb_left_door = InlineKeyboardMarkup([
             [InlineKeyboardButton('Попытатся убежать', callback_data='run')]
 ])
 inline_kb_right_door = InlineKeyboardMarkup([
-    [InlineKeyboardButton('Золотая корона', callback_data='gold_crow')],
+    [InlineKeyboardButton('Золотая корона', callback_data='gold_crown')],
     [InlineKeyboardButton("Серебреный кинжал", callback_data="silver_dagger")],
     [InlineKeyboardButton('Старая книга', callback_data='old_book')]
 ])
