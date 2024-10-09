@@ -1,3 +1,4 @@
+import base64
 import json
 import random
 
@@ -5,6 +6,10 @@ from pyrogram import Client, filters
 from random import randint
 import datetime
 import keyboards
+import config
+import keyboards
+from FusionBrain_AI import generate
+
 
 date_time = datetime.datetime.now()
 current_time = date_time.time()
@@ -30,6 +35,25 @@ async def info(client, message):
     await message.reply('/game')
     await message.reply('/profile')
     await message.reply('/quest')
+    await message.reply('/image')
+
+@bot.on_message(filters.command('image'))
+async def image(bot, message):
+    if len(message.text.split()) > 1:
+        query = message.text.replace('/image', '')
+        await message.reply_text(f'Генерирую изображения по запросу "{query}", подожди немного...')
+        images = await generate(query)
+        if images:
+            image_data = base64.b64encode(images[0])
+            with open(f"images/image.jpg", "wb") as file:
+                file.write(image_data)
+            await bot.send_photo(message.chat.id, f'images/image.ijg',
+                                            reply_to_message_id=message.id)
+        else:
+            await message.reply_text('Возникла ошибка, попробуй еще раз',
+                                            reply_to_message_id=message.id)
+    else:
+        await message.reply_text("Введите запрос")
 @bot.on_message(filters.command('time'))
 async def time(client, message):
     date_time = datetime.datetime.now()
