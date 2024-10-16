@@ -3,6 +3,7 @@ import json
 import random
 
 from pyrogram import Client, filters
+from pyrogram.types import ForceReply
 from random import randint
 import datetime
 import keyboards
@@ -37,23 +38,47 @@ async def info(client, message):
     await message.reply('/quest')
     await message.reply('/image')
 
-@bot.on_message(filters.command('image'))
-async def image(bot, message):
-    if len(message.text.split()) > 1:
-        query = message.text.replace('/image', '')
-        await message.reply_text(f'Генерирую изображения по запросу "{query}", подожди немного...')
-        images = await generate(query)
+@bot.on_message(filters.reply)
+async def reply(bot, message):
+    if message.reply_to_message.text == query_text:
+        query = message.text
+        await message.reply_text(f'Генерирую изображение по запросу **{query}**. Ожидание около минуты')
+
+        images =await generate(query)
         if images:
-            image_data = base64.b64encode(images[0])
-            with open(f"images/image.jpg", "wb") as file:
+            image_data = base64.b64decode(images[0])
+            img_num = random.randint(1, 1000000)
+            with open(f"images/image{img_num}.jpg", "wb") as file:
                 file.write(image_data)
-            await bot.send_photo(message.chat.id, f'images/image.ijg',
-                                            reply_to_message_id=message.id)
+            await bot.send_photo(message.chat.id, f'images/image{img_num}.jpg',
+                                            reply_to_message_id=message.id,
+                                            reply_markup=keyboards.kb_main)
         else:
             await message.reply_text('Возникла ошибка, попробуй еще раз',
-                                            reply_to_message_id=message.id)
-    else:
-        await message.reply_text("Введите запрос")
+                                            reply_to_message_id=message.id,
+                                            reply_markup=keyboards.kb_main)
+query_text = "Введи запрос для генерации изображения"
+@bot.on_message(filters.command('image') | button_filter(keyboards.btn_jpg))
+async def image(bot, message):
+    await message.reply(query_text, "Введи запрос для генерации изображения",
+                                reply_markup=ForceReply(True))
+    # if len(message.text.split()) > 1:
+    #     query = message.text.replace('/image', '')
+    #     await message.reply_text(f'Генерирую изображения по запросу "{query}", подожди немного...')
+    #     images = await generate(query)
+    #     if images:
+    #         image_data = base64.b64decode(images[0])
+    #         img_num = random.randint(1, 1000000)
+    #         with open(f"images/image{img_num}.jpg", "wb") as file:
+    #             file.write(image_data)
+    #         await bot.send_photo(message.chat.id, f'images/image{img_num}.jpg',
+    #                                         reply_to_message_id=message.id)
+    #     else:
+    #         await message.reply_text('Возникла ошибка, попробуй еще раз',
+    #                                         reply_to_message_id=message.id)
+    # else:
+    #     await message.reply_text("Введите запрос")
+
 @bot.on_message(filters.command('time'))
 async def time(client, message):
     date_time = datetime.datetime.now()

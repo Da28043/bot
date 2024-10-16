@@ -31,9 +31,10 @@ btn_quest = KeyboardButton(f'{emoji.RED_QUESTION_MARK} Квест')
 btn_rock = KeyboardButton(f'{emoji.ROCK} Камени')
 btn_scissors = KeyboardButton(f'{emoji.SCISSORS} Ножницы')
 btn_paper = KeyboardButton(f'{emoji.ROLL_OF_PAPER} Бумага')
+btn_jpg = KeyboardButton(f'{emoji.ROBOT} Фото')
 kb_main = ReplyKeyboardMarkup(
     keyboard=[
-                [btn_info, btn_games, btn_profile, btn_time]
+                [btn_info, btn_games, btn_profile, btn_time, btn_jpg]
     ],
     resize_keyboard=True
 )
