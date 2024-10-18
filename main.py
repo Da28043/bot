@@ -44,7 +44,7 @@ async def reply(bot, message):
         query = message.text
         await message.reply_text(f'Генерирую изображение по запросу **{query}**. Ожидание около минуты')
 
-        images =await generate(query)
+        images = await generate(query)
         if images:
             image_data = base64.b64decode(images[0])
             img_num = random.randint(1, 1000000)
