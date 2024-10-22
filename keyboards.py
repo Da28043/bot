@@ -19,7 +19,9 @@ inline_kb_right_door = InlineKeyboardMarkup([
     [InlineKeyboardButton("Серебреный кинжал", callback_data="silver_dagger")],
     [InlineKeyboardButton('Старая книга', callback_data='old_book')]
 ])
-
+inline_kb_old_book = InlineKeyboardMarkup([
+    [InlineKeyboardButton('Открыть книгу', callback_data='old_book')],
+])
 
 btn_info = KeyboardButton(f'{emoji.INFORMATION} Инфо')
 btn_games = KeyboardButton(f'{emoji.VIDEO_GAME} Игры')

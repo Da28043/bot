@@ -196,6 +196,11 @@ async def handle_query(bot, query):
         await bot.answer_callback_query(query.id, text='Ты берешь серебренный кинжал и выходишь из комнаты. К сожалению, клинок ничего не стоит',
                                         show_alert=True)
     elif query.data == 'old_book':
-        await bot.answer_callback_query(query.id, text='Ты берешь старую книгу и выходишь из комнаты. Книга оказывается магической! Ты открываешь страницу и исчезаешь',
+        await bot.answer_callback_query(query.id,
+                                        text='Ты берешь старую книгу и выходишь из комнаты. Книга оказывается магической.',
                                         show_alert=True)
+        event = random.choice(['treasure_map', 'guardian'])
+
+        message = 'Ты открываешь книгу и находишь карту сокровищ!' if event == 'treasure_map' else 'Из книги вырывается страж! Приготовься к сражению!'
+        await bot.send_message(query.from_user.id, message)
 bot.run()
